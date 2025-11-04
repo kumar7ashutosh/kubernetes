@@ -15,14 +15,16 @@ spec:
       containers:
       - name: kubernetes-test-app
         image: kubernetes-test-app:latest
-        imagePullPolicy: Never  # Tell Kubernetes not to pull from a registry
-        # image: vikash95/kubernetes-test-app:latest
+        imagePullPolicy: Never  # Don't pull from registry, use local image
+        ports:
+        - containerPort: 5000
         resources:
+          requests:
+            memory: "32Mi"
+            cpu: "100m"
           limits:
             memory: "64Mi"
             cpu: "200m"
-        ports:
-        - containerPort: 5000
 ---
 apiVersion: v1
 kind: Service
